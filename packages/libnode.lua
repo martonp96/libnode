@@ -9,10 +9,6 @@ package("libnode")
         package:add("deps", "nasm")
     end)
 
-    if is_plat("macosx") then
-        add_requires("brew::coreutils", { alias = "coreutils" })
-    end
-
     on_install("macosx", "linux", "windows", function (package)
         io.replace("common.gypi", "'-fno-rtti',", "")
         io.replace("tools/v8_gypfiles/features.gypi", "'v8_advanced_bigint_algorithms%%': 1", "'v8_advanced_bigint_algorithms%%': 1,\n    'use_rtti%%': 1")
