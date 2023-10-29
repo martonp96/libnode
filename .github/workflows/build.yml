@@ -14,12 +14,16 @@ jobs:
       fail-fast: false
       matrix:
         arch: [x64]
-        os: [macos-latest, ubuntu-latest, windows-latest]
+        os: [macos-latest, macos-13, macos-13-arm64, ubuntu-latest, windows-latest]
 
     runs-on: ${{ matrix.os }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
+
+      - name: Check system
+        if: runner.os == 'macOS'
+        run: uname -m
 
       - name: Setup xmake
         uses: xmake-io/github-action-setup-xmake@v1
