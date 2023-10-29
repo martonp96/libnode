@@ -38,7 +38,9 @@ jobs:
       - name: Build xmake project
         if: runner.os == 'Windows'
         shell: bash
-        run: xmake -y -p windows --toolchain=msvc --verbose
+        run: | 
+            xmake config -y -p windows --toolchain=msvc --verbose
+            xmake -y --verbose
 
       - name: Upload artifacts
         uses: actions/upload-artifact@v2.3.1
