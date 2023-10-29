@@ -26,9 +26,19 @@ jobs:
         with:
           xmake-version: latest
 
+      - name: Setup macos deps
+        if: runner.os == 'macOS'
+        run: brew install coreutils
+
       - name: Build xmake project
+        if: runner.os != 'Windows'
         shell: bash
         run: xmake -y --verbose
+
+      - name: Build xmake project
+        if: runner.os == 'Windows'
+        shell: bash
+        run: xmake -y -p windows --toolchain=msvc --verbose
 
       - name: Upload artifacts
         uses: actions/upload-artifact@v2.3.1

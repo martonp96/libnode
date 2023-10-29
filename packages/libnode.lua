@@ -9,9 +9,9 @@ package("libnode")
         package:add("deps", "nasm")
     end)
 
-    on_load("macosx", function (package)
-        package:add("deps", "coreutils")
-    end)
+    if is_plat("macosx") then
+        add_requires("brew::coreutils", { alias = "coreutils" })
+    end
 
     on_install("macosx", "linux", "windows", function (package)
         io.replace("common.gypi", "'-fno-rtti',", "")
