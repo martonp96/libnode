@@ -10,7 +10,7 @@ package("libnode")
     end)
 
     on_load("macosx", function (package)
-        package:add("deps", "brew::coreutils")
+        package:add("deps", "coreutils")
     end)
 
     on_install("macosx", "linux", "windows", function (package)
@@ -21,9 +21,9 @@ package("libnode")
             local configs = { "release", "x64", "dll", "no-cctest" }
             os.vrunv("vcbuild.bat", configs)
         else
-            local configs = {"--shared" }
+            local configs = { "--shared" }
             os.vrunv("./configure", configs)
-            os.vrunv("make", "-j4")
+            os.vrunv("make", { "-j4" })
         end
         os.trycp("out/Release/*.dylib", package:installdir("lib"))
         os.trycp("out/Release/*.so", package:installdir("lib"))

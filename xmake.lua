@@ -9,6 +9,10 @@ set_symbols("debug")
 add_requires("libnode")
 add_rules("plugin.vsxmake.autoupdate")
 
+if is_os("windows") then
+    add_toolchains("msvc")
+end
+
 target("libnode-test")
     set_default(true)
     set_kind("binary")
