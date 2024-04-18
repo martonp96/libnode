@@ -21,7 +21,7 @@ target("libnode-test")
     if is_os("linux") then
         add_linkdirs("$(scriptdir)/artifacts/lib")
         add_links("node")
-    else
+    end
     on_load(function (target)
         os.trycp(path.join(target:pkg("libnode"):installdir(), "lib"), "artifacts/")
         os.trycp(path.join(target:pkg("libnode"):installdir(), "bin"), "artifacts/")
