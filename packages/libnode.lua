@@ -10,14 +10,15 @@ package("libnode")
     end)
 
     on_install("macosx", "linux", "windows", function (package)
-        io.replace("common.gypi", "'-fno-rtti',", "")
+        io.replace("common.gypi", "'-fno-rtti',", "", { plain = true })
+        io.replace("configure.py", "    shlib_suffix = '.so.%s'", "    shlib_suffix = '.so'", { plain = true })
         io.replace("tools/v8_gypfiles/features.gypi", "'v8_advanced_bigint_algorithms%%': 1", "'v8_advanced_bigint_algorithms%%': 1,\n    'use_rtti%%': 1")
 
         if package:is_plat("windows") then
             local configs = { "release", "x64", "dll", "no-cctest" }
             os.vrunv("vcbuild.bat", configs)
         else
-            local configs = { "--shared" }
+            local configs = { "--shared", "--prefix=" .. package:installdir("rel") }
             os.vrunv("./configure", configs)
             os.vrunv("make", { "-j4" })
         end
