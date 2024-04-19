@@ -4,9 +4,9 @@ on:
   push:
     branches:
       - master
-  pull_request:
-    branches:
-      - master
+    tags:        
+      - release
+      - debug
 
 jobs:
   build:
@@ -26,20 +26,18 @@ jobs:
         with:
           xmake-version: latest
 
-      - name: Setup macos deps
-        if: runner.os == 'macOS'
-        run: brew install coreutils
-
       - name: Build xmake project
         if: runner.os != 'Windows'
         shell: bash
-        run: xmake -y --verbose
+        run: | 
+            xmake config -m ${{  github.ref_name }}
+            xmake -y --verbose
 
       - name: Build xmake project
         if: runner.os == 'Windows'
         shell: bash
         run: | 
-            xmake config -y -p windows --toolchain=msvc --verbose
+            xmake config -y -p windows -m ${{  github.ref_name }} --toolchain=msvc --verbose
             xmake -y --verbose
 
       - name: Upload artifacts
