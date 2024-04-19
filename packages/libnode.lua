@@ -19,7 +19,10 @@ package("libnode")
             print(is_mode("debug") and "debug" or "release")
             os.vrunv("vcbuild.bat", configs)
         else
-            local configs = { is_mode("debug") and "--debug" or "", "--shared", "--prefix=" .. package:installdir("rel") }
+            local configs = { "--shared", "--prefix=" .. package:installdir("rel") }
+            if is_mode("debug") then
+                table.insert(configs, "--debug")
+            end
             os.vrunv("./configure", configs)
             os.vrunv("make", { "-j4" })
         end
