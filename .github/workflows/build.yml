@@ -28,7 +28,7 @@ jobs:
         if: runner.os != 'Windows'
         shell: bash
         run: | 
-            xmake config -y -m ${{  github.ref_name }}
+            xmake config -y -m ${{  github.ref_name }} --verbose
             xmake -y --verbose
 
       - name: Build xmake project
