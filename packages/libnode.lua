@@ -11,7 +11,7 @@ package("libnode")
 
     on_install("macosx", "linux", "windows", function (package)
         io.replace("common.gypi", "'-fno-rtti',", "", { plain = true })
-        io.replace("configure.py", "    shlib_suffix = '.so.%s'", "    shlib_suffix = '.so'", { plain = true })
+        io.replace("configure.py", "    shlib_suffix = 'so.%s'", "    shlib_suffix = 'so'", { plain = true })
         io.replace("tools/v8_gypfiles/features.gypi", "'v8_advanced_bigint_algorithms%%': 1", "'v8_advanced_bigint_algorithms%%': 1,\n    'use_rtti%%': 1")
 
         if package:is_plat("windows") then
@@ -23,7 +23,7 @@ package("libnode")
             os.vrunv("make", { "-j4" })
         end
         os.trycp("out/Release/*.dylib", package:installdir("lib"))
-        os.trycp("out/Release/*.so", package:installdir("lib"))
+        os.trycp("out/Release/*.so", package:installdir("bin"))
         os.trycp("out/Release/*.a", package:installdir("lib"))
         os.trycp("out/Release/*.lib", package:installdir("lib"))
         os.trycp("out/Release/*.dll", package:installdir("bin"))
