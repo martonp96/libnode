@@ -3,7 +3,7 @@ package("libnode")
     set_license("MIT")
 
     add_urls("https://nodejs.org/dist/v$(version)/node-v$(version).tar.gz")
-    add_versions("20.9.0", "a7e6547a951406e4e546a74160ed27b26f9abd4baf7c44dd5a0fa992852d0cfa")
+    add_versions("20.12.2", "bc57ee721a12cc8be55bb90b4a9a2f598aed5581d5199ec3bd171a4781bfecda")
 
     on_load("windows", function (package)
         package:add("deps", "nasm")
