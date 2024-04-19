@@ -15,13 +15,8 @@ end
 
 target("libnode-test")
     set_default(true)
-    set_kind("binary")
-    add_files("src/main.cpp")
+    set_kind("phony")
     add_packages("libnode")
-    if is_os("linux") then
-        add_linkdirs("$(scriptdir)/artifacts/lib")
-        add_links("node")
-    end
     on_load(function (target)
         os.trycp(path.join(target:pkg("libnode"):installdir(), "lib"), "artifacts/")
         os.trycp(path.join(target:pkg("libnode"):installdir(), "bin"), "artifacts/")

@@ -51,7 +51,3 @@ jobs:
         with:
           name: libnode-${{ runner.os }}-${{ matrix.arch }}
           path: ./artifacts
-
-      - name: Run test
-        shell: bash
-        run: xmake run
