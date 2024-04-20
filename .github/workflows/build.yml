@@ -17,7 +17,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Setup xmake
         uses: xmake-io/github-action-setup-xmake@v1
@@ -39,7 +39,7 @@ jobs:
             xmake -y --verbose
 
       - name: Upload artifacts
-        uses: actions/upload-artifact@v2.3.1
+        uses: actions/upload-artifact@v4
         with:
           name: libnode-${{ runner.os }}-${{ matrix.arch }}
           path: ./artifacts
