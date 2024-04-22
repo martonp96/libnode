@@ -43,3 +43,22 @@ jobs:
         with:
           name: libnode-${{ runner.os }}-${{ matrix.arch }}
           path: ./artifacts
+
+  release:
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Download artifacts
+        uses: actions/download-artifact@v4
+
+      - name: Create Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: |
+            ${{ github.workspace }}/libnode-Linux-x64.zip
+            ${{ github.workspace }}/libnode-Windows-x64.zip
+
+      - uses: geekyeggo/delete-artifact@v5
+        with:
+          name: libnode-*
+
