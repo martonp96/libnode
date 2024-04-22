@@ -58,7 +58,8 @@ jobs:
             ${{ github.workspace }}/libnode-Linux-x64.zip
             ${{ github.workspace }}/libnode-Windows-x64.zip
 
-      - uses: geekyeggo/delete-artifact@v5
+      - name: Delete artifacts
+        uses: geekyeggo/delete-artifact@v5
         with:
           name: libnode-*
 
