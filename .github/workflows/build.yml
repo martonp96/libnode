@@ -53,28 +53,32 @@ jobs:
       - name: Download artifacts
         uses: actions/download-artifact@v4
 
-      - name: Zip linux files
+      - name: Zip node headers
         uses: TheDoctor0/zip-release@0.7.6
         with:
           type: zip
-          filename: libnode-linux.zip
+          filename: headers.zip
           directory: ${{ github.workspace }}
-          path: libnode-Linux-x64
+          path: libnode-Linux-x64/include
 
-      - name: Zip windows files
+      - name: Zip node deps
         uses: TheDoctor0/zip-release@0.7.6
         with:
           type: zip
-          filename: libnode-windows.zip
+          filename: deps.zip
           directory: ${{ github.workspace }}
-          path: libnode-Windows-x64
+          path: libnode-Linux-x64/deps
 
       - name: Create Release
         uses: softprops/action-gh-release@v2
         with:
           files: |
-            ${{ github.workspace }}/libnode-linux.zip
-            ${{ github.workspace }}/libnode-windows.zip
+            ${{ github.workspace }}/headers.zip
+            ${{ github.workspace }}/deps.zip
+            ${{ github.workspace }}/libnode-Windows-x64/bin/libnode.dll
+            ${{ github.workspace }}/libnode-Windows-x64/bin/libnode.lib
+            ${{ github.workspace }}/libnode-Windows-x64/bin/libnode.pdb
+            ${{ github.workspace }}/libnode-Linux-x64/bin/libnode.so
 
       - name: Delete artifacts
         uses: geekyeggo/delete-artifact@v5
