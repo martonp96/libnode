@@ -51,19 +51,30 @@ jobs:
       contents: write
     steps:
       - name: Download artifacts
-        uses: dawidd6/action-download-artifact@v3
+        uses: actions/download-artifact@v4
+
+      - name: Zip linux files
+        uses: TheDoctor0/zip-release@0.7.6
         with:
-          skip_unpack: true
-          path: ${{ github.workspace }}
-          github_token: ${{secrets.GITHUB_TOKEN}}
-          workflow: build.yml
+          type: zip
+          filename: libnode-linux.zip
+          directory: ${{ github.workspace }}
+          path: libnode-Linux-x64
+
+      - name: Zip windows files
+        uses: TheDoctor0/zip-release@0.7.6
+        with:
+          type: zip
+          filename: libnode-windows.zip
+          directory: ${{ github.workspace }}
+          path: libnode-Windows-x64
 
       - name: Create Release
         uses: softprops/action-gh-release@v2
         with:
           files: |
-            ${{ github.workspace }}/libnode-Linux-x64.zip
-            ${{ github.workspace }}/libnode-Windows-x64.zip
+            ${{ github.workspace }}/libnode-linux.zip
+            ${{ github.workspace }}/libnode-windows.zip
 
       - name: Delete artifacts
         uses: geekyeggo/delete-artifact@v5
