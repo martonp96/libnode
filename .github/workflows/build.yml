@@ -59,22 +59,13 @@ jobs:
           type: zip
           filename: headers.zip
           directory: ${{ github.workspace }}
-          path: libnode-Linux-x64/include
-
-      - name: Zip node deps
-        uses: TheDoctor0/zip-release@0.7.6
-        with:
-          type: zip
-          filename: deps.zip
-          directory: ${{ github.workspace }}
-          path: libnode-Linux-x64/deps
+          path: libnode-Linux-x64/node
 
       - name: Create Release
         uses: softprops/action-gh-release@v2
         with:
           files: |
             ${{ github.workspace }}/headers.zip
-            ${{ github.workspace }}/deps.zip
             ${{ github.workspace }}/libnode-Windows-x64/bin/libnode.dll
             ${{ github.workspace }}/libnode-Windows-x64/bin/libnode.lib
             ${{ github.workspace }}/libnode-Windows-x64/bin/libnode.pdb
