@@ -55,6 +55,8 @@ jobs:
         with:
           skip_unpack: true
           path: ${{ github.workspace }}
+          github_token: ${{secrets.GITHUB_TOKEN}}
+          workflow: build.yml
 
       - name: Create Release
         uses: softprops/action-gh-release@v2
