@@ -36,10 +36,10 @@ package("libnode")
         end
 
         local type = is_mode("debug") and "Debug" or "Release"
-        os.trycp("out/" .. type .. "/libnode.so", package:installdir("bin"))
-        os.trycp("out/" .. type .. "/libnode.lib", package:installdir("bin"))
-        os.trycp("out/" .. type .. "/libnode.dll", package:installdir("bin"))
-        os.trycp("out/" .. type .. "/libnode.pdb", package:installdir("bin"))
+        os.trycp("out/" .. type .. "/libnode20.so", package:installdir("bin"))
+        os.trycp("out/" .. type .. "/libnode20.lib", package:installdir("bin"))
+        os.trycp("out/" .. type .. "/libnode20.dll", package:installdir("bin"))
+        os.trycp("out/" .. type .. "/libnode20.pdb", package:installdir("bin"))
         os.trycp("src/**.h", package:installdir("node"), { rootdir="src" })
         os.trycp("deps/openssl/**.h", package:installdir("node", "openssl"), { rootdir="deps/openssl" })
         os.trycp("deps/uv/include/**.h", package:installdir("node", "uv"), { rootdir="deps/uv/include" })
