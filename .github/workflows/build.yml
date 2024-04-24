@@ -66,10 +66,10 @@ jobs:
         with:
           files: |
             ${{ github.workspace }}/headers.zip
-            ${{ github.workspace }}/libnode-Windows-x64/bin/libnode.dll
-            ${{ github.workspace }}/libnode-Windows-x64/bin/libnode.lib
-            ${{ github.workspace }}/libnode-Windows-x64/bin/libnode.pdb
-            ${{ github.workspace }}/libnode-Linux-x64/bin/libnode.so
+            ${{ github.workspace }}/libnode-Windows-x64/bin/libnode20.dll
+            ${{ github.workspace }}/libnode-Windows-x64/bin/libnode20.lib
+            ${{ github.workspace }}/libnode-Windows-x64/bin/libnode20.pdb
+            ${{ github.workspace }}/libnode-Linux-x64/bin/libnode20.so
 
       - name: Delete artifacts
         uses: geekyeggo/delete-artifact@v5

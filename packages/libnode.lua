@@ -17,6 +17,11 @@ package("libnode")
         -- enable RTTI for the build
         io.replace("common.gypi", "'-fno-rtti',", "", { plain = true })
         io.replace("tools/v8_gypfiles/features.gypi", "'v8_advanced_bigint_algorithms%%': 1", "'v8_advanced_bigint_algorithms%%': 1,\n    'use_rtti%%': 1")
+        -- rename output file name
+        io.replace("node.gyp", "'libnode'", "'libnode20'", { plain = true })
+        io.replace("tools/install.py", "libnode.", "libnode20.", { plain = true })
+        io.replace("vcbuild.bat", "libnode.", "libnode20.", { plain = true })
+
 
         if package:is_plat("windows") then
             local configs = { is_mode("debug") and "debug" or "release", "x64", "dll", "no-cctest" }
