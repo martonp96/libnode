@@ -20,7 +20,8 @@ jobs:
         with:
           submodules: 'recursive'
 
-      - uses: jirutka/setup-alpine@v1
+      - name: Setup alpine
+        uses: jirutka/setup-alpine@v1
         if: runner.os != 'Windows'
         with:
           branch: v3.15
