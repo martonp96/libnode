@@ -1,0 +1,19 @@
+diff --git a/lib/internal/bootstrap/realm.js b/lib/internal/bootstrap/realm.js
+index 9cb6a8add7..6090473d7d 100644
+--- a/lib/internal/bootstrap/realm.js
++++ b/lib/internal/bootstrap/realm.js
+@@ -209,12 +209,12 @@ const getOwn = (target, property, receiver) => {
+ 
+ const publicBuiltinIds = builtinIds
+   .filter((id) =>
+-    !StringPrototypeStartsWith(id, 'internal/') &&
++    !StringPrototypeStartsWith(id, 'yespls/') &&
+       !experimentalModuleList.has(id),
+   );
+ // Do not expose the loaders to user land even with --expose-internals.
+ const internalBuiltinIds = builtinIds
+-  .filter((id) => StringPrototypeStartsWith(id, 'internal/') && id !== selfId);
++  .filter((id) => StringPrototypeStartsWith(id, 'yespls/') && id !== selfId);
+ 
+ // When --expose-internals is on we'll add the internal builtin ids to these.
+ let canBeRequiredByUsersList = new SafeSet(publicBuiltinIds);
