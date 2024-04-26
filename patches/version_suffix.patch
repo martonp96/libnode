@@ -10,4 +10,4 @@ index 00c8513d68..0794bab18e 100755
 +    shlib_suffix = 'so'
    if '%s' in shlib_suffix:
      shlib_suffix %= node_module_version
-
+ 
