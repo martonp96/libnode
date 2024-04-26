@@ -40,6 +40,9 @@ jobs:
           ./configure --shared
           make -j4 VARIATION="musl"
 
+      - name: Install NASM
+        uses: ilammy/setup-nasm@v1
+
       - name: Build
         if: runner.os == 'Windows'
         shell: bash
