@@ -58,6 +58,7 @@ index 17b0947aac..3e49ce2d74 100755
        action(options, [os.path.join(options.build_dir, output_lib)],
               os.path.join(options.variables.get('libdir'), output_lib))
 
+
 diff --git a/vcbuild.bat b/vcbuild.bat
 index 75f0850b01..3baa17461f 100644
 --- a/vcbuild.bat
