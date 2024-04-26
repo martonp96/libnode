@@ -26,11 +26,10 @@ jobs:
       - name: Build project
         if: runner.os != 'Windows'
         shell: alpine.sh {0}
-        run: build.sh
+        run: ./build.sh
 
       - name: Build project
         if: runner.os == 'Windows'
-        shell: bash
         run: build.bat
 
       - name: Upload artifacts
