@@ -44,7 +44,7 @@ jobs:
         if: runner.os == 'Windows'
         shell: bash
         working-directory: ./node
-        run: vcbuild.bat release x64 dll no-cctest
+        run: ./vcbuild.bat release x64 dll no-cctest
 
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
