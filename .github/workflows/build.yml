@@ -19,6 +19,7 @@ jobs:
         if: runner.os != 'Windows'
         with:
           branch: v3.15
+          packages: git libstdc++ bash binutils-gold curl g++ gcc gnupg libgcc linux-headers make python2 python3 ccache xz
 
       - name: Build project
         if: runner.os != 'Windows'
