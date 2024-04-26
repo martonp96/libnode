@@ -1,9 +1,6 @@
 name: Build libnode
 
-on:
-  push:
-    tags:        
-      - release
+on: push
 
 jobs:
   build:
