@@ -25,7 +25,10 @@ jobs:
         if: runner.os != 'Windows'
         with:
           branch: v3.15
-          packages: git libstdc++ bash binutils-gold curl g++ gcc gnupg libgcc linux-headers make python2 python3 ccache xz
+          packages: >
+            git bash binutils-gold curl gnupg libgcc linux-headers make python2 python3 ccache xz
+            libssl1.1 libcrypto1.1 libstdc++ musl-dbg libatomic
+            lld~=13 clang-dev~=13 clang~=13
 
       - name: Apply patches
         shell: bash
@@ -41,10 +44,12 @@ jobs:
         working-directory: ./node
         shell: alpine.sh {0}
         run: |
-          export CC="gcc"
-          export CXX="g++"
+          export CC="clang"
+          export CXX="clang++"
+          export CXXFLAGS="-g -mssse3 -std=c++17"
+          export LDFLAGS="-L/usr/lib64 -Wl,-rpath,'' -m64 -lstdc++ -lcrypto -lssl -Wl,--build-id -fuse-ld=lld"
           ./configure --shared
-          make -j4 VARIATION="musl"
+          make -j4
 
       - name: Install NASM
         uses: ilammy/setup-nasm@v1
