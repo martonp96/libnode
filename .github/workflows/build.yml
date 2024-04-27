@@ -25,10 +25,6 @@ jobs:
         if: runner.os != 'Windows'
         with:
           branch: v3.15
-          packages: >
-            git bash binutils-gold curl gnupg libgcc linux-headers make python2 python3 ccache xz
-            libssl1.1 libcrypto1.1 libstdc++ musl-dbg libatomic
-            lld~=13 clang-dev~=13 clang~=13
 
       - name: Apply patches
         shell: bash
@@ -38,6 +34,24 @@ jobs:
           git apply --reject --whitespace=fix ../patches/internal_modules.patch
           git apply --reject --whitespace=fix ../patches/rename_output.patch
           git apply --reject --whitespace=fix ../patches/version_suffix.patch
+
+      - name: Install deps
+        if: runner.os != 'Windows'
+        working-directory: ./node
+        shell: alpine.sh {0}
+        run: |
+          echo http://dl-cdn.alpinelinux.org/alpine/v3.12/main > /etc/apk/repositories
+          echo http://dl-cdn.alpinelinux.org/alpine/v3.14/main >> /etc/apk/repositories
+          echo http://dl-cdn.alpinelinux.org/alpine/v3.16/main >> /etc/apk/repositories
+          echo http://dl-cdn.alpinelinux.org/alpine/v3.16/community >> /etc/apk/repositories
+          echo http://dl-cdn.alpinelinux.org/alpine/edge/main >> /etc/apk/repositories
+          echo http://dl-cdn.alpinelinux.org/alpine/edge/community >> /etc/apk/repositories
+          echo http://dl-cdn.alpinelinux.org/alpine/edge/testing >> /etc/apk/repositories
+          apk upgrade alpine-keys
+          apk add -X https://dl-cdn.alpinelinux.org/alpine/v3.16/main -u alpine-keys
+          apk add git bash binutils-gold curl gnupg libgcc linux-headers make python2 python3 ccache xz
+          apk add libssl1.1 libcrypto1.1 libstdc++ musl-dbg libatomic
+          apk add lld~=13 clang-dev~=13 clang~=13
 
       - name: Build project
         if: runner.os != 'Windows'
