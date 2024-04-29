@@ -28,17 +28,7 @@ jobs:
           packages: >
             git bash binutils-gold curl gnupg libgcc linux-headers make python3 ccache xz libatomic
             clang clang-dev clang-libs llvm13-dev lld
-            libc-dev musl musl-dev musl-dbg libstdc++
-
-      - name: Build project
-        if: runner.os != 'Windows'
-        working-directory: ./node
-        shell: alpine.sh {0}
-        run: |
-          cd /usr/include
-          ls
-          cd c++
-          ls
+            libc-dev musl musl-dev musl-dbg gcc g++
 
       - name: Apply patches
         shell: bash
@@ -56,7 +46,7 @@ jobs:
         run: |
           export CC="clang"
           export CXX="clang++"
-          export CXXFLAGS="-g -mssse3 -std=c++17 -I/usr/include/c++/12.2.1 -I/usr/include/c++/12.2.1/x86_64-alpine-linux-musl"
+          export CXXFLAGS="-g -mssse3 -std=c++17"
           export LDFLAGS="-m64 -lstdc++ -Wl,--build-id -fuse-ld=lld"
           ./configure --shared
           make -j4
