@@ -46,7 +46,7 @@ jobs:
         run: |
           export CC="clang"
           export CXX="clang++"
-          export CXXFLAGS="-g -mssse3 -std=c++17"
+          export CXXFLAGS="-g -mssse3 -std=c++17 -I/usr/include/c++/12.2.1 -I/usr/include/c++/12.2.1/x86_64-alpine-linux-musl"
           export LDFLAGS="-m64 -lstdc++ -Wl,--build-id -fuse-ld=lld"
           ./configure --shared
           make -j4
