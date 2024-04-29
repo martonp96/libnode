@@ -46,7 +46,7 @@ jobs:
         run: |
           export CC="clang"
           export CXX="clang++"
-          export CXXFLAGS="-gused -mssse3 -std=c++17"
+          export CXXFLAGS="-mssse3 -std=c++17"
           export LDFLAGS="-m64 -lstdc++ -Wl,--build-id -fuse-ld=lld"
           ./configure --shared
           make -j4
