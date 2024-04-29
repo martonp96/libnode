@@ -26,7 +26,7 @@ jobs:
         with:
           branch: v3.16
           packages: >
-            git bash binutils-gold curl gnupg libgcc linux-headers make python3 ccache xz libstdc++ musl-dev musl-dbg libatomic lld clang-dev clang
+            git bash binutils-gold curl gnupg libgcc linux-headers make python3 ccache xz libstdc++ llvm13-dev libc-dev musl-dev musl-dbg libatomic lld clang-dev clang
 
 
       - name: Apply patches
