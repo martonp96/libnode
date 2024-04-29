@@ -30,6 +30,16 @@ jobs:
             clang clang-dev clang-libs llvm13-dev lld
             libc-dev musl musl-dev musl-dbg libstdc++
 
+      - name: Build project
+        if: runner.os != 'Windows'
+        working-directory: ./node
+        shell: alpine.sh {0}
+        run: |
+          cd /usr/include
+          ls
+          cd c++
+          ls
+
       - name: Apply patches
         shell: bash
         working-directory: ./node
