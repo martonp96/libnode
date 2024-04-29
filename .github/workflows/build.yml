@@ -24,7 +24,7 @@ jobs:
         uses: jirutka/setup-alpine@v1
         if: runner.os != 'Windows'
         with:
-          branch: v3.15
+          branch: v3.16
 
       - name: Apply patches
         shell: bash
@@ -40,18 +40,9 @@ jobs:
         working-directory: ./node
         shell: alpine.sh {0}
         run: |
-          echo http://dl-cdn.alpinelinux.org/alpine/v3.12/main > /etc/apk/repositories
-          echo http://dl-cdn.alpinelinux.org/alpine/v3.14/main >> /etc/apk/repositories
-          echo http://dl-cdn.alpinelinux.org/alpine/v3.16/main >> /etc/apk/repositories
-          echo http://dl-cdn.alpinelinux.org/alpine/v3.16/community >> /etc/apk/repositories
-          echo http://dl-cdn.alpinelinux.org/alpine/edge/main >> /etc/apk/repositories
-          echo http://dl-cdn.alpinelinux.org/alpine/edge/community >> /etc/apk/repositories
-          echo http://dl-cdn.alpinelinux.org/alpine/edge/testing >> /etc/apk/repositories
-          apk upgrade alpine-keys
-          apk add -X https://dl-cdn.alpinelinux.org/alpine/v3.16/main -u alpine-keys
           apk add git bash binutils-gold curl gnupg libgcc linux-headers make python2 python3 ccache xz
-          apk add libssl1.1 libcrypto1.1 libstdc++ musl-dbg libatomic
-          apk add lld~=13 clang-dev~=13 clang~=13
+          apk add libstdc++ musl-dbg libatomic
+          apk add lld clang-dev clang
 
       - name: Build project
         if: runner.os != 'Windows'
@@ -61,7 +52,7 @@ jobs:
           export CC="clang"
           export CXX="clang++"
           export CXXFLAGS="-g -mssse3 -std=c++17"
-          export LDFLAGS="-L/usr/lib64 -Wl,-rpath,'' -m64 -lstdc++ -lcrypto -lssl -Wl,--build-id -fuse-ld=lld"
+          export LDFLAGS="-m64 -lstdc++ -Wl,--build-id -fuse-ld=lld"
           ./configure --shared
           make -j4
 
